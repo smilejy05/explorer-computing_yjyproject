@@ -13,6 +13,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 
 
 st.set_page_config(page_title="대학생 월별 예산 관리 앱", layout="wide")
@@ -185,12 +186,11 @@ def get_consumption_type():
 def create_pdf_report():
     buffer = BytesIO()
 
-    try:
-        pdfmetrics.registerFont(TTFont("KoreanFont", "C:/Windows/Fonts/malgun.ttf"))
-        font_name = "KoreanFont"
-    except:
-        font_name = "Helvetica"
+    pdfmetrics.registerFont(
+        UnicodeCIDFont("HYSMyeongJo-Medium")
+    )
 
+    font_name = "HYSMyeongJo-Medium"
     doc = SimpleDocTemplate(buffer, pagesize=A4)
     styles = getSampleStyleSheet()
 
